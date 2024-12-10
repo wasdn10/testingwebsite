@@ -1,268 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta Information -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Empowering businesses with innovative IT, healthcare, and corporate solutions - Muntjac Group Resources.">
-    <meta name="keywords" content="Business Solutions, IT Infrastructure, Healthcare Tools, Corporate Success, Muntjac Group">
+    <meta name="description" content="Advanced Solutions for IT, Healthcare, and Corporate Needs - Muntjac Group Resources">
+    <meta name="keywords" content="Business, IT, Healthcare, Corporate Tools, Modern Web Solutions">
     <meta name="author" content="Muntjac Group Resources">
+
+    <!-- Title -->
     <title>Muntjac Group - Innovate, Empower, Succeed</title>
-    <!-- Link to the external stylesheet -->
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Inline Critical CSS -->
-    <style>
-        /* General Styles */
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            scroll-behavior: smooth;
-            background: #f9f9f9;
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0H01LEGMEJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
         }
-        section {
-            padding: 4rem 2rem;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Header */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: #000;
-            color: #fff;
-            padding: 1rem 2rem;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .nav-links {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-        .nav-links li {
-            margin: 0 1rem;
-        }
-        .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1rem;
-        }
-        .nav-links a.active {
-            text-decoration: underline;
-        }
-
-        /* Scroll Progress Bar */
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 5px;
-            background: #007BFF;
-            z-index: 2000;
-            width: 0;
-            transition: width 0.2s ease;
-        }
-
-        /* Hero */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(to right, #007BFF, #00C6FF);
-            color: white;
-            text-align: center;
-        }
-        .hero button {
-            margin-top: 1rem;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .hero button:hover {
-            background-color: #0056b3;
-        }
-
-        /* Portfolio */
-        .portfolio-grid {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-        .portfolio-item {
-            flex: 1 1 calc(33.33% - 2rem);
-            background: white;
-            border: 1px solid #ddd;
-            padding: 1rem;
-            cursor: pointer;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-        .portfolio-item:hover {
-            transform: scale(1.05);
-        }
-
-        /* Contact */
-        form {
-            display: grid;
-            gap: 1rem;
-        }
-        form input, form textarea, form button {
-            width: 100%;
-            padding: 0.8rem;
-            font-size: 1rem;
-        }
-        form button {
-            background: #007BFF;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        form button:hover {
-            background: #0056b3;
-        }
-
-        /* Footer */
-        footer {
-            background: #000;
-            color: white;
-            text-align: center;
-            padding: 1rem 0;
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .portfolio-item {
-                flex: 1 1 calc(100% - 2rem);
-            }
-        }
-    </style>
+        gtag('js', new Date());
+        gtag('config', 'G-0H01LEGMEJ');
+    </script>
 </head>
 <body>
-    <!-- Scroll Progress Bar -->
-    <div class="progress-bar" id="progress-bar"></div>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
 
     <!-- Header -->
     <header class="header">
-        <h1>Muntjac Group</h1>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#services" class="nav-link">Services</a></li>
-                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <h1 class="logo">Muntjac Group</h1>
+            <nav>
+                <button class="hamburger" aria-label="Toggle Navigation">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <h2>Innovate. Empower. Succeed.</h2>
-        <p>Delivering cutting-edge IT, healthcare, and corporate solutions to empower your business.</p>
-        <button onclick="scrollToSection('about')">Discover More</button>
+        <div class="container">
+            <div class="hero-content">
+                <h2>Innovate. Empower. Succeed.</h2>
+                <p>Delivering cutting-edge IT, healthcare, and corporate solutions to empower your business.</p>
+                <a href="#about" class="btn-primary">Discover More</a>
+            </div>
+        </div>
     </section>
 
     <!-- About Section -->
-    <section id="about">
-        <h2>About Us</h2>
-        <p>We specialize in providing advanced IT, healthcare, and corporate solutions to streamline operations, maximize efficiency, and drive success.</p>
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>We specialize in providing advanced IT, healthcare, and corporate solutions to streamline operations, maximize efficiency, and drive success.</p>
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>10+</h3>
+                    <p>Years of Excellence</p>
+                </div>
+                <div class="stat-card">
+                    <h3>500+</h3>
+                    <p>Global Clients</p>
+                </div>
+                <div class="stat-card">
+                    <h3>3000+</h3>
+                    <p>Projects Completed</p>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services">
-        <h2>Our Services</h2>
-        <p>From IT infrastructure to healthcare and corporate tools, we offer solutions tailored to your needs.</p>
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="service-grid">
+                <div class="service-card">
+                    <img src="assets/healthcare.jpg" alt="Healthcare Solutions">
+                    <h3>Healthcare Solutions</h3>
+                    <p>Revolutionizing healthcare with modern technology and tools.</p>
+                </div>
+                <div class="service-card">
+                    <img src="assets/it.jpg" alt="IT Infrastructure">
+                    <h3>IT Infrastructure</h3>
+                    <p>Providing robust IT systems for seamless business operations.</p>
+                </div>
+                <div class="service-card">
+                    <img src="assets/corporate.jpg" alt="Corporate Tools">
+                    <h3>Corporate Tools</h3>
+                    <p>Enhancing workplace productivity with smart corporate tools.</p>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Portfolio Section -->
-    <section id="portfolio">
-        <h2>Portfolio</h2>
-        <div class="portfolio-grid">
-            <div class="portfolio-item" onclick="showPortfolioDetails('Project 1')">
-                <h3>Project 1</h3>
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2>Our Portfolio</h2>
+            <p>Explore some of our innovative projects and successful partnerships.</p>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="assets/project1.jpg" alt="Project 1">
+                    <h3>Project One</h3>
+                    <p>Streamlining IT operations for global clients.</p>
+                </div>
+                <div class="portfolio-item">
+                    <img src="assets/project2.jpg" alt="Project 2">
+                    <h3>Project Two</h3>
+                    <p>Transforming healthcare with innovative solutions.</p>
+                </div>
+                <div class="portfolio-item">
+                    <img src="assets/project3.jpg" alt="Project 3">
+                    <h3>Project Three</h3>
+                    <p>Developing corporate tools for enhanced productivity.</p>
+                </div>
             </div>
-            <div class="portfolio-item" onclick="showPortfolioDetails('Project 2')">
-                <h3>Project 2</h3>
-            </div>
-            <div class="portfolio-item" onclick="showPortfolioDetails('Project 3')">
-                <h3>Project 3</h3>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2>What Our Clients Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p>"Muntjac Group transformed our IT infrastructure, saving us thousands of dollars in operational costs!"</p>
+                    <h4>John Doe</h4>
+                    <small>CEO, GlobalTech Inc.</small>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Their healthcare solutions are innovative and have significantly improved patient care in our hospital."</p>
+                    <h4>Jane Smith</h4>
+                    <small>Director, HealthCore Hospital</small>
+                </div>
+                <div class="testimonial-card">
+                    <p>"The corporate tools provided by Muntjac Group have enhanced workplace productivity like never before."</p>
+                    <h4>Emily Johnson</h4>
+                    <small>Manager, CorpTools Ltd.</small>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <form id="contactForm">
-            <input type="text" id="name" placeholder="Your Name" required>
-            <input type="email" id="email" placeholder="Your Email" required>
-            <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>Have questions or want to collaborate? Reach out to us today!</p>
+            <form id="contactForm">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Send Message</button>
+            </form>
+        </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Muntjac Group Resources. All Rights Reserved.</p>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Muntjac Group Resources. All Rights Reserved.</p>
+        </div>
     </footer>
 
-    <!-- Inline JavaScript -->
-    <script>
-        // Smooth Scroll to Section
-        function scrollToSection(sectionId) {
-            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Scroll Progress Bar
-        window.addEventListener('scroll', () => {
-            const scrollPosition = document.documentElement.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrollPercent = (scrollPosition / scrollHeight) * 100;
-            document.getElementById('progress-bar').style.width = `${scrollPercent}%`;
-        });
-
-        // Portfolio Interaction
-        function showPortfolioDetails(projectName) {
-            alert(`Details of ${projectName} coming soon!`);
-        }
-
-        // Form Submission Handling
-        document.getElementById('contactForm').addEventListener('submit', (event) => {
-            event.preventDefault();
-            alert('Thank you for reaching out! We’ll respond shortly.');
-        });
-
-        // Section Visibility on Scroll
-        const sections = document.querySelectorAll('section');
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            },
-            { threshold: 0.2 }
-        );
-        sections.forEach(section => observer.observe(section));
-    </script>
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
