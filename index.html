@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Empowering businesses with innovative IT, healthcare, and corporate solutions - Muntjac Group Resources.">
+    <meta name="keywords" content="Business Solutions, IT Infrastructure, Healthcare Tools, Corporate Success, Muntjac Group">
+    <meta name="author" content="Muntjac Group Resources">
+    <title>Muntjac Group - Innovate, Empower, Succeed</title>
+
+    <!-- Inline Critical CSS -->
+    <style>
+        /* General Styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
+            background: #f9f9f9;
+        }
+        section {
+            padding: 4rem 2rem;
+        }
+        .hidden {
+            display: none;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #000;
+            color: #fff;
+            padding: 1rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links li {
+            margin: 0 1rem;
+        }
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        .nav-links a.active {
+            text-decoration: underline;
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to right, #007BFF, #00C6FF);
+            color: white;
+            text-align: center;
+        }
+        .hero button {
+            margin-top: 1rem;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .hero button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Stats */
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .stat-card {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 2rem;
+            }
+            .stats {
+                flex-direction: column;
+                align-items: center;
+            }
+            .stat-card {
+                margin: 1rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1>Muntjac Group</h1>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h2>Innovate. Empower. Succeed.</h2>
+        <p>Delivering cutting-edge IT, healthcare, and corporate solutions to empower your business.</p>
+        <button onclick="scrollToSection('about')">Discover More</button>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Us</h2>
+        <p>We specialize in providing advanced IT, healthcare, and corporate solutions to streamline operations, maximize efficiency, and drive success.</p>
+        <div class="stats">
+            <div class="stat-card">
+                <h3 class="stat-number" data-target="10">0</h3>
+                <p>Years of Excellence</p>
+            </div>
+            <div class="stat-card">
+                <h3 class="stat-number" data-target="500">0</h3>
+                <p>Global Clients</p>
+            </div>
+            <div class="stat-card">
+                <h3 class="stat-number" data-target="3000">0</h3>
+                <p>Projects Completed</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form id="contactForm">
+            <div>
+                <input type="text" id="name" placeholder="Your Name" required>
+            </div>
+            <div>
+                <input type="email" id="email" placeholder="Your Email" required>
+            </div>
+            <div>
+                <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+            </div>
+            <button type="submit">Send Message</button>
+        </form>
+        <p id="formMessage" class="hidden"></p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Muntjac Group Resources. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Inline JavaScript -->
+    <script>
+        // Smooth Scroll to Section
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Highlight Active Navigation
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            sections.forEach(section => {
+                const top = window.scrollY;
+                const offset = section.offsetTop - 100;
+                const height = section.offsetHeight;
+                const id = section.getAttribute('id');
+
+                if (top >= offset && top < offset + height) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    document.querySelector(`.nav-link[href="#${id}"]`).classList.add('active');
+                }
+            });
+        });
+
+        // Stats Animation
+        function animateStats() {
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                const target = +stat.dataset.target;
+                let count = 0;
+                const increment = target / 100;
+
+                const updateStat = () => {
+                    count += increment;
+                    if (count < target) {
+                        stat.textContent = Math.ceil(count);
+                        requestAnimationFrame(updateStat);
+                    } else {
+                        stat.textContent = target;
+                    }
+                };
+
+                updateStat();
+            });
+        }
+
+        const aboutSection = document.querySelector('#about');
+        const observer = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) {
+                animateStats();
+                observer.disconnect();
+            }
+        });
+        observer.observe(aboutSection);
+
+        // Form Submission
+        document.getElementById('contactForm').addEventListener('submit', event => {
+            event.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            if (!name || !email || !message) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            const formMessage = document.getElementById('formMessage');
+            formMessage.textContent = 'Thank you! Your message has been sent.';
+            formMessage.classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
