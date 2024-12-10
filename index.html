@@ -20,9 +20,13 @@
         }
         section {
             padding: 4rem 2rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-        .hidden {
-            display: none;
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Header */
@@ -33,7 +37,7 @@
             width: 100%;
             background: #000;
             color: #fff;
-            padding: 1rem;
+            padding: 1rem 2rem;
             z-index: 1000;
             display: flex;
             justify-content: space-between;
@@ -55,6 +59,18 @@
         }
         .nav-links a.active {
             text-decoration: underline;
+        }
+
+        /* Scroll Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: #007BFF;
+            z-index: 2000;
+            width: 0;
+            transition: width 0.2s ease;
         }
 
         /* Hero */
@@ -82,15 +98,43 @@
             background-color: #0056b3;
         }
 
-        /* Stats */
-        .stats {
+        /* Portfolio */
+        .portfolio-grid {
             display: flex;
-            justify-content: space-around;
+            gap: 2rem;
             flex-wrap: wrap;
         }
-        .stat-card {
-            text-align: center;
+        .portfolio-item {
+            flex: 1 1 calc(33.33% - 2rem);
+            background: white;
+            border: 1px solid #ddd;
             padding: 1rem;
+            cursor: pointer;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .portfolio-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Contact */
+        form {
+            display: grid;
+            gap: 1rem;
+        }
+        form input, form textarea, form button {
+            width: 100%;
+            padding: 0.8rem;
+            font-size: 1rem;
+        }
+        form button {
+            background: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        form button:hover {
+            background: #0056b3;
         }
 
         /* Footer */
@@ -103,20 +147,16 @@
 
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
-            .hero {
-                padding: 2rem;
-            }
-            .stats {
-                flex-direction: column;
-                align-items: center;
-            }
-            .stat-card {
-                margin: 1rem 0;
+            .portfolio-item {
+                flex: 1 1 calc(100% - 2rem);
             }
         }
     </style>
 </head>
 <body>
+    <!-- Scroll Progress Bar -->
+    <div class="progress-bar" id="progress-bar"></div>
+
     <!-- Header -->
     <header class="header">
         <h1>Muntjac Group</h1>
@@ -125,6 +165,7 @@
                 <li><a href="#home" class="nav-link">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
         </nav>
@@ -141,18 +182,26 @@
     <section id="about">
         <h2>About Us</h2>
         <p>We specialize in providing advanced IT, healthcare, and corporate solutions to streamline operations, maximize efficiency, and drive success.</p>
-        <div class="stats">
-            <div class="stat-card">
-                <h3 class="stat-number" data-target="10">0</h3>
-                <p>Years of Excellence</p>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <h2>Our Services</h2>
+        <p>From IT infrastructure to healthcare and corporate tools, we offer solutions tailored to your needs.</p>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <h2>Portfolio</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item" onclick="showPortfolioDetails('Project 1')">
+                <h3>Project 1</h3>
             </div>
-            <div class="stat-card">
-                <h3 class="stat-number" data-target="500">0</h3>
-                <p>Global Clients</p>
+            <div class="portfolio-item" onclick="showPortfolioDetails('Project 2')">
+                <h3>Project 2</h3>
             </div>
-            <div class="stat-card">
-                <h3 class="stat-number" data-target="3000">0</h3>
-                <p>Projects Completed</p>
+            <div class="portfolio-item" onclick="showPortfolioDetails('Project 3')">
+                <h3>Project 3</h3>
             </div>
         </div>
     </section>
@@ -161,18 +210,11 @@
     <section id="contact">
         <h2>Contact Us</h2>
         <form id="contactForm">
-            <div>
-                <input type="text" id="name" placeholder="Your Name" required>
-            </div>
-            <div>
-                <input type="email" id="email" placeholder="Your Email" required>
-            </div>
-            <div>
-                <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
-            </div>
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
             <button type="submit">Send Message</button>
         </form>
-        <p id="formMessage" class="hidden"></p>
     </section>
 
     <!-- Footer -->
@@ -184,75 +226,41 @@
     <script>
         // Smooth Scroll to Section
         function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            section.scrollIntoView({ behavior: 'smooth' });
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Highlight Active Navigation
+        // Scroll Progress Bar
         window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-link');
-
-            sections.forEach(section => {
-                const top = window.scrollY;
-                const offset = section.offsetTop - 100;
-                const height = section.offsetHeight;
-                const id = section.getAttribute('id');
-
-                if (top >= offset && top < offset + height) {
-                    navLinks.forEach(link => link.classList.remove('active'));
-                    document.querySelector(`.nav-link[href="#${id}"]`).classList.add('active');
-                }
-            });
+            const scrollPosition = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercent = (scrollPosition / scrollHeight) * 100;
+            document.getElementById('progress-bar').style.width = `${scrollPercent}%`;
         });
 
-        // Stats Animation
-        function animateStats() {
-            const stats = document.querySelectorAll('.stat-number');
-            stats.forEach(stat => {
-                const target = +stat.dataset.target;
-                let count = 0;
-                const increment = target / 100;
-
-                const updateStat = () => {
-                    count += increment;
-                    if (count < target) {
-                        stat.textContent = Math.ceil(count);
-                        requestAnimationFrame(updateStat);
-                    } else {
-                        stat.textContent = target;
-                    }
-                };
-
-                updateStat();
-            });
+        // Portfolio Interaction
+        function showPortfolioDetails(projectName) {
+            alert(`Details of ${projectName} coming soon!`);
         }
 
-        const aboutSection = document.querySelector('#about');
-        const observer = new IntersectionObserver(entries => {
-            if (entries[0].isIntersecting) {
-                animateStats();
-                observer.disconnect();
-            }
-        });
-        observer.observe(aboutSection);
-
-        // Form Submission
-        document.getElementById('contactForm').addEventListener('submit', event => {
+        // Form Submission Handling
+        document.getElementById('contactForm').addEventListener('submit', (event) => {
             event.preventDefault();
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const message = document.getElementById('message').value.trim();
-
-            if (!name || !email || !message) {
-                alert('Please fill in all fields.');
-                return;
-            }
-
-            const formMessage = document.getElementById('formMessage');
-            formMessage.textContent = 'Thank you! Your message has been sent.';
-            formMessage.classList.remove('hidden');
+            alert('Thank you for reaching out! We’ll respond shortly.');
         });
+
+        // Section Visibility on Scroll
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            },
+            { threshold: 0.2 }
+        );
+        sections.forEach(section => observer.observe(section));
     </script>
 </body>
 </html>
